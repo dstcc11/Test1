@@ -1,24 +1,12 @@
 version: 2.1
 jobs:
-  bootstrap:
+  terraform:
     docker:
       - image: hashicorp/terraform:1.7.0
     steps:
       - checkout
       - run:
-          name: Bootstrap Terraform backend
-          command: |
-            cd bootstrap
-            terraform init -input=false
-            terraform apply -auto-approve
-
-  deploy:
-    docker:
-      - image: hashicorp/terraform:1.7.0
-    steps:
-      - checkout
-      - run:
-          name: Configure Terraform backend
+          name: Initialize Terraform
           command: |
             cd main
             terraform init -input=false
@@ -34,9 +22,6 @@ jobs:
             terraform apply -auto-approve
 
 workflows:
-  terraform-pipeline:
+  terraform-deploy:
     jobs:
-      - bootstrap
-      - deploy:
-          requires:
-            - bootstrap
+      - terraform
