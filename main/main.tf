@@ -12,7 +12,7 @@ resource "aws_vpc" "vpc1" {
   cidr_block           = "10.100.0.0/16"
   enable_dns_hostnames = true
   tags = {
-    Name = "VPC001"
+    Name = "VPC1"
   }
 }
 
@@ -20,6 +20,6 @@ resource "aws_vpc" "vpc2" {
   cidr_block           = "10.200.0.0/16"
   enable_dns_hostnames = true
   tags = {
-    Name = "VPC002"
+    Name = "VPC2"
   }
 }

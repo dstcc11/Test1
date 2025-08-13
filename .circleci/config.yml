@@ -14,13 +14,18 @@ jobs:
       - run:
           name: Terraform Init
           command: |
-            terraform init
+            cd main
+            terraform init -input=false
       - run:
           name: Terraform Plan
-          command: terraform plan
+          command: |
+            cd main
+            terraform plan
       - run:
           name: Terraform Apply
-          command: terraform apply -auto-approve
+          command: |
+            cd main
+            terraform apply -auto-approve
 
 workflows:
   terraform-deploy:
