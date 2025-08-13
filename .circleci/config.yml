@@ -6,20 +6,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Initialize Terraform
-          command: |
-            cd main
-            terraform init -input=false
+          name: Terraform Init
+          command: terraform init
       - run:
           name: Terraform Plan
-          command: |
-            cd main
-            terraform plan
+          command: terraform plan
       - run:
           name: Terraform Apply
-          command: |
-            cd main
-            terraform apply -auto-approve
+          command: terraform apply -auto-approve
 
 workflows:
   terraform-deploy:
