@@ -5,6 +5,8 @@ jobs:
       - image: hashicorp/terraform:1.7.0
     steps:
       - checkout
+      - aws-cli/setup:
+         role-arn: 'arn:aws:iam::637423299911:role/CircleCI_Role'
       - run:
           name: Terraform Init
           command: terraform init
