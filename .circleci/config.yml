@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+  terraform:
+    docker:
+      - image: hashicorp/terraform:1.7.0
+    steps:
+      - checkout
+      - run:
+          name: Terraform Init
+          command: terraform init
+      - run:
+          name: Terraform Plan
+          command: terraform plan
+      - run:
+          name: Terraform Apply
+          command: terraform apply -auto-approve
+
+workflows:
+  terraform-deploy:
+    jobs:
+      - terraform
