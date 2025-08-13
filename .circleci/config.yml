@@ -11,7 +11,6 @@ jobs:
       - checkout
       - aws-cli/setup:
           role_arn: "arn:aws:iam::637423299911:role/CircleCI_Role"
-          region: "us-east-1"
       - run:
           name: Terraform Init
           command: |
