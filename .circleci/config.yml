@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@4.1.1
+  aws-cli: circleci/aws-cli@5.2.0
 
 jobs:
   terraform:
@@ -10,8 +10,8 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::637423299911:role/CircleCI_Role"
-          aws-region: "us-east-1"
+          role_arn: "arn:aws:iam::637423299911:role/CircleCI_Role"
+          region: "us-east-1"
       - run:
           name: Terraform Init
           command: |
