@@ -1,4 +1,8 @@
 version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@4.1.1
+
 jobs:
   terraform:
     docker:
@@ -6,10 +10,12 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-         role-arn: 'arn:aws:iam::637423299911:role/CircleCI_Role'
+          role-arn: "arn:aws:iam::637423299911:role/CircleCI_Role"
+          aws-region: "us-east-1"
       - run:
           name: Terraform Init
-          command: terraform init
+          command: |
+            terraform init
       - run:
           name: Terraform Plan
           command: terraform plan
