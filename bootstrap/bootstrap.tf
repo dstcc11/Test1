@@ -2,6 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
+/*
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "my-terraform-state-bucket3079"
 
@@ -29,3 +30,4 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     type = "S"
   }
 }
+*/
