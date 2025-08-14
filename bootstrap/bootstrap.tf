@@ -5,7 +5,7 @@ provider "aws" {
 locals {
   backend = {
     "Analytics_Backend" = {
-      bucket = "analytics-bp-terraform-state-uat-us111"
+      bucket = var.bucket
     }
   }
 }
