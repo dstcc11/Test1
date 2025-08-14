@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          role_arn: "arn:aws:iam::590183980613:role/CircleCI_Role"
+          role_arn: "arn:aws:iam::891377117312:role/CircleCI_Role"
       - run:
           name: Terraform Init
           command: |
