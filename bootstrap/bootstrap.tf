@@ -2,8 +2,16 @@ provider "aws" {
   region = var.region
 }
 
+locals {
+  backend = {
+    "Analytics_Backend" = {
+      bucket = "analytics-bp-terraform-state-uat-us111"
+    }
+  }
+}
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = var.bucket
+  for_each = local.backend
+  bucket   = each.value.bucket
 
   lifecycle {
     prevent_destroy = true
@@ -11,7 +19,8 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state" {
-  bucket = aws_s3_bucket.terraform_state.id
+  for_each = local.backend
+  bucket   = aws_s3_bucket.terraform_state[each.key].id
 
   versioning_configuration {
     status = "Enabled"
@@ -19,7 +28,8 @@ resource "aws_s3_bucket_versioning" "terraform_state" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state" {
-  bucket = aws_s3_bucket.terraform_state.id
+  for_each = local.backend
+  bucket   = aws_s3_bucket.terraform_state[each.key].id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -29,7 +39,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state" 
 }
 
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name           = "terraform-lock-table"
+  for_each       = local.backend
+  name           = "${each.value.bucket}-terraform-lock-table"
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"
