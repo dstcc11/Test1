@@ -10,21 +10,21 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          role_arn: "arn:aws:iam::891377117312:role/CircleCI_Role"
+          role_arn: "arn:aws:iam::891377102493:role/CircleCI_Role"
       - run:
           name: Terraform Init
           command: |
-            cd main
+            cd infra
             terraform init -input=false
       - run:
           name: Terraform Plan
           command: |
-            cd main
+            cd infra
             terraform plan
       - run:
           name: Terraform Apply
           command: |
-            cd main
+            cd infra
             terraform apply -auto-approve
 
 workflows:
